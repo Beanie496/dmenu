@@ -1,0 +1,26 @@
+diff --git a/dmenu_path b/dmenu_path
+index 3a7cda7..1a39269 100755
+--- a/dmenu_path
++++ b/dmenu_path
+@@ -1,10 +1,11 @@
+-#!/bin/sh
++#!/usr/bin/zsh
+ 
+ cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
+ cache="$cachedir/dmenu_run"
+ 
+ [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
+ 
++setopt sh_word_split
+ IFS=:
+ if stest -dqr -n "$cache" $PATH; then
+ 	stest -flx $PATH | sort -u | tee "$cache"
+diff --git a/dmenu_run b/dmenu_run
+index 834ede5..2c28c53 100755
+--- a/dmenu_run
++++ b/dmenu_run
+@@ -1,2 +1,3 @@
+-#!/bin/sh
++#!/usr/bin/sh
++
+ dmenu_path | dmenu "$@" | ${SHELL:-"/bin/sh"} &

@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/usr/bin/zsh
 
 cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
 cache="$cachedir/dmenu_run"
 
 [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
 
+setopt sh_word_split
 IFS=:
 if stest -dqr -n "$cache" $PATH; then
 	stest -flx $PATH | sort -u | tee "$cache"
